@@ -1,8 +1,7 @@
 import os
-import sys
 import json
 import subprocess
-from core.Auxiliates import *
+from core.Auxiliares import *
 
 class Setup:
     def __init__(self):

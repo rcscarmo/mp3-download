@@ -1,8 +1,7 @@
 import os
-import sys
 import requests
 from core.Setup import Setup
-from core.Auxiliates import *
+from core.Auxiliares import *
 
 class YouTubeDownloader(Setup):
     def __init__(self):
@@ -24,7 +23,7 @@ class YouTubeDownloader(Setup):
                 lines = f.readlines()
                 if lines == []:
                     message(f"Nenhum item conteúdo encontrado no arquivo {arquivo}.")
-                    log_write(f"Nenhum item conteúdo encontrado no arquivo `{arquivo}`", self.file_log)
+                    logWrite(f"Nenhum item conteúdo encontrado no arquivo `{arquivo}`", self.file_log)
                     self.file_log.close()
                     pause()
 
@@ -45,17 +44,17 @@ class YouTubeDownloader(Setup):
                             contador += 1
                             if contador == len(lines) + 1:
                                 message(f"Todos os videos do arquivo {arquivo} foram baixados.")
-                                log_write(f"Todos os videos do arquivo `{arquivo}` foram baixados.", self.file_log)
+                                logWrite(f"Todos os videos do arquivo `{arquivo}` foram baixados.", self.file_log)
                                 self.file_log.close()
                     elif response.status_code == 403:
                         error = f"Cotas do dia para key `{self.keys[key_atual]}` finalizadas.\n"
                         error += f"Tentiva falha de baixar video: `{query} - {arquivo.replace("-", " ")}` {self.last_video or  ''}"
                         message(f"{error}")
-                        log_write(error, self.file_log)
+                        logWrite(error, self.file_log)
                         if contador != (len(self.keys) - 1):
                             key_atual += 1
                         else:
                             error = f"Todas as keys utilizadas.\n"
                             message(error)
-                            log_write(error, self.file_log)
+                            logWrite(error, self.file_log)
                             pause()
